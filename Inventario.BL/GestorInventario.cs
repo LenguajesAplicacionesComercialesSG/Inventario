@@ -21,6 +21,7 @@
             listaProductos.Add(producto);
         }
 
+        // Metodo para eliminar producto
         public void EliminarProducto(int idProducto)
         {
             var producto = listaProductos.FirstOrDefault(p => p.Id == idProducto);
