@@ -1,23 +1,29 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Inventario.MODEL;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventario.Web.Controllers
 {
     public class ProductsController : Controller
     {
+        private readonly BL.GestorInventario _gestor;
+
+        public ProductsController(BL.GestorInventario gestor)
+        {
+            _gestor = gestor;
+        }
+
         // GET: ProductsController
         public ActionResult Index()
         {
-            Inventario.BL.GestorInventario gestor = new BL.GestorInventario();
-            var productos = gestor.ObtenerProductos();
+            var productos = _gestor.ObtenerProductos();
             return View(productos);
         }
 
         // GET: ProductsController/Details/5
         public ActionResult Details(int id)
         {
-            Inventario.BL.GestorInventario gestor = new BL.GestorInventario();
-            var producto = gestor.ObtenerProductoPorId(id);
+            var producto = _gestor.ObtenerProductoPorId(id);
 
             return View(producto);
         }
@@ -31,10 +37,18 @@ namespace Inventario.Web.Controllers
         // POST: ProductsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Producto producto)
         {
             try
             {
+
+                if (!ModelState.IsValid) { 
+                
+                    return View(producto);
+                }
+
+                _gestor.AgregarProducto(producto);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -46,16 +60,24 @@ namespace Inventario.Web.Controllers
         // GET: ProductsController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var producto = _gestor.ObtenerProductoPorId(id);
+            return View(producto);
         }
 
         // POST: ProductsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
+        public ActionResult Edit(int id, Producto producto)
+        {   
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(producto);
+                }
+
+                _gestor.ActualizarProducto(producto);
+
                 return RedirectToAction(nameof(Index));
             }
             catch

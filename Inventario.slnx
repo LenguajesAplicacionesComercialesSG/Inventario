@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="Inventario.BL/Inventario.BL.csproj" />
+  <Project Path="Inventario.DA/Inventario.DA.csproj" Id="d238ffd9-8cf0-47d6-ac06-1186da3f353f" />
   <Project Path="Inventario.MODEL/Inventario.MODEL.csproj" />
   <Project Path="Inventario.Tests/Inventario.Tests.csproj" Id="aa130aab-e9c9-430b-9b6a-161d143ccf9b" />
   <Project Path="Inventario.UI/Inventario.UI.csproj" />
