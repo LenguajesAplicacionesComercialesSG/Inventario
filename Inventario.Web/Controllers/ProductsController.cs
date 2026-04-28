@@ -9,7 +9,7 @@ namespace Inventario.Web.Controllers
         public ActionResult Index()
         {
             Inventario.BL.GestorInventario gestor = new BL.GestorInventario();
-             var productos = gestor.ObtenerProductos();
+            var productos = gestor.ObtenerProductos();
             return View(productos);
         }
 
