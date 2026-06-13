@@ -28,6 +28,11 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseCors(builder => builder
+     .AllowAnyOrigin()
+     .AllowAnyMethod()
+     .AllowAnyHeader());
+
 app.UseHttpsRedirection();
 
 app.UseMiddleware<ApiKeyMiddleware>();
@@ -36,9 +41,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseCors(builder => builder
-     .AllowAnyOrigin()
-     .AllowAnyMethod()
-     .AllowAnyHeader());
+
 
 app.Run();
