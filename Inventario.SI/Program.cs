@@ -1,9 +1,18 @@
+using Azure.Identity;
 using Inventario.BL;
 using Inventario.DA;
 using Inventario.SI;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+if (builder.Environment.IsProduction())
+{
+    builder.Configuration.AddAzureKeyVault(
+        new Uri("https://kv-inventarioapialo.vault.azure.net/"),
+        new DefaultAzureCredential());
+}
+
 
 // Add services to the container.
 

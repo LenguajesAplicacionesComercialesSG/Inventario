@@ -18,7 +18,7 @@ namespace Inventario.SI
 
         public async Task Invoke(HttpContext httpContext, IConfiguration configuration)
         {
-            var apiKey = configuration["ApiKey"];
+            var apiKey = configuration["ApiSettings:ApiKey"];
 
             if (!httpContext.Request.Headers.TryGetValue(API_KEY_NAME, out var headerApiKey))
             {
